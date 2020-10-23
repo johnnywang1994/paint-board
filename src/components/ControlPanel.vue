@@ -54,7 +54,7 @@ export default {
   },
   data() {
     return {
-      lockSize: false,
+      lockSize: true,
     };
   },
 };

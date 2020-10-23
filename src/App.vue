@@ -1,5 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png" />
+  <h1>Vue Paint Board</h1>
   <ControlPanel v-model="canvasConfig" />
   <PaintBoard :config="canvasConfig" />
 </template>
@@ -14,14 +15,16 @@ export default {
     ControlPanel,
     PaintBoard,
   },
-  setup() {
-    const canvasConfig = reactive({
-      width: 300,
-      height: 300,
-      strokeStyle: 'red',
-      lineWidth: 1
-    });
-    return { canvasConfig };
+  data() {
+    return {
+      showPicker: false,
+      canvasConfig: {
+        width: 300,
+        height: 300,
+        strokeStyle: [0, 0, 0],
+        lineWidth: 1
+      }
+    };
   }
 }
 </script>

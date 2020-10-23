@@ -50,7 +50,7 @@ export default {
       });
       watchEffect(() => {
         const { strokeStyle, lineWidth } = vm.config;
-        ctx.strokeStyle = strokeStyle;
+        ctx.strokeStyle = `rgb(${strokeStyle.join()})`;
         ctx.lineWidth = lineWidth;
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';

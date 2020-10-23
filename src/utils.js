@@ -21,7 +21,7 @@ export function getOffset(e) {
   if (e.offsetX) {
     return { x: e.offsetX, y: e.offsetY };
   }
-  const touch = e.touches[0];
+  const touch = e.touches?.[0] || {};
   const bcr = e.target.getBoundingClientRect();
   return {
     x: touch.clientX - bcr.x,
