@@ -10,7 +10,7 @@
       <!-- one-d -->
       <div
         class="oned"
-        :style="`max-width: ${barWidth}px;height: ${barHeight}px;`"
+        :style="`width: ${barWidth}px;height: ${barHeight}px;`"
         @touchstart="onOnedDragStart"
         @touchmove="onOnedDragging"
         @touchend="onOnedDragStop"
@@ -236,6 +236,10 @@ export default {
       position: relative;
       display: flex;
       align-items: center;
+      @media screen and (max-width: 992px) {
+        width: auto !important;
+        max-width: 300px;
+      }
       .oned-pointer {
         position: absolute;
         width: 10px;
