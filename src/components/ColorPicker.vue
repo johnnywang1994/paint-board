@@ -11,8 +11,8 @@
       <div
         class="oned"
         :style="`width: ${barWidth}px;height: ${barHeight}px;`"
-        @touchstart="onOnedDragStart"
-        @touchmove="onOnedDragging"
+        @touchstart.prevent.stop="onOnedDragStart"
+        @touchmove.prevent.stop="onOnedDragging"
         @touchend="onOnedDragStop"
         @touchcancel="onOnedDragStop"
         @mousedown="onOnedDragStart"
@@ -27,8 +27,8 @@
       <div
         class="twod"
         :style="`background: rgb(${onedTemp.join()});height: ${twodHeight}px`"
-        @touchstart="onTwodDragStart"
-        @touchmove="onTwodDragging"
+        @touchstart.prevent.stop="onTwodDragStart"
+        @touchmove.prevent.stop="onTwodDragging"
         @touchend="onTwodDragStop"
         @touchcancel="onTwodDragStop"
         @mousedown="onTwodDragStart"
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { getOffset, fixBody } from '../utils';
+import { getOffset } from '../utils';
 
 export default {
   name: 'ColorPicker',
@@ -78,7 +78,7 @@ export default {
       onedX: 0,
       twodX: this.barWidth,
       twodY: 0,
-      onedTemp: [0, 0, 0],
+      onedTemp: [0, 0, 0], // stores color as an copy
       breakPoints: [0, 17, 33, 50, 66, 83, 100]
     };
   },
@@ -131,7 +131,6 @@ export default {
     },
     onOnedDragStop() {
       this.onedDragging = false;
-      // this.$emit('update:modelValue', [...this.onedTemp]);
     },
     // One-d Color
     handleOnedColor() {
@@ -168,7 +167,6 @@ export default {
     onTwodDragStart(e) {
       this.twodDragging = true;
       this.onTwodDragging(e);
-      fixBody(true);
     },
     onTwodDragging(e) {
       const vm = this;
@@ -186,7 +184,6 @@ export default {
     },
     onTwodDragStop() {
       this.twodDragging = false;
-      fixBody(false);
     },
     // Two-d Color
     fixTwoDAxis(v) {

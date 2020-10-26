@@ -1,7 +1,7 @@
 <template>
   <canvas
-    @touchstart="startDrawing"
-    @touchmove="drawCanvas"
+    @touchstart.prevent.stop="startDrawing"
+    @touchmove.prevent.stop="drawCanvas"
     @touchend="stopDrawing"
     @touchcancel="stopDrawing"
     @mousedown="startDrawing"
@@ -13,7 +13,7 @@
 
 <script>
 import { watchEffect } from 'vue';
-import { getOffset, fixBody } from '../utils';
+import { getOffset } from '../utils';
 
 export default {
   name: 'PaintBoard',
@@ -63,7 +63,6 @@ export default {
       vm._isDrawing = true;
       vm._position.x = x;
       vm._position.y = y;
-      fixBody(true);
     },
     drawCanvas(e) {
       const vm = this;
@@ -80,7 +79,6 @@ export default {
     },
     stopDrawing() {
       this._isDrawing = false;
-      fixBody(false);
     },
   },
   mounted() {
